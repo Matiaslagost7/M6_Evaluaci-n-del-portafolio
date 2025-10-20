@@ -1,0 +1,161 @@
+/* ==========================================================================
+   Base Styles - Concesionaria AutoVentas
+   ========================================================================== */
+
+/* Main Content Spacing */
+main {
+    padding-top: 90px;
+}
+
+/* ==========================================================================
+   Navbar Styles
+   ========================================================================== */
+
+.nav-link-custom {
+    color: #495057 !important;
+    transition: all 0.3s ease;
+}
+
+.nav-link-custom:hover {
+    color: #007bff !important;
+    background-color: rgba(0, 123, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.nav-link-admin {
+    color: #28a745 !important;
+    background-color: rgba(40, 167, 69, 0.1);
+    transition: all 0.3s ease;
+}
+
+.nav-link-admin:hover {
+    color: #fff !important;
+    background-color: #28a745;
+    transform: translateY(-1px);
+}
+
+.navbar-brand:hover {
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+}
+
+/* ==========================================================================
+   Footer Styles
+   ========================================================================== */
+
+.footer-link {
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+    opacity: 1 !important;
+    color: #007bff !important;
+    transform: translateX(5px);
+}
+
+.btn-outline-light:hover {
+    transform: translateY(-2px);
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* ==========================================================================
+   Back to Top Button
+   ========================================================================== */
+
+.back-to-top {
+    transition: all 0.3s ease;
+}
+
+.back-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3);
+}
+
+/* ==========================================================================
+   Dropdown Menu Styles
+   ========================================================================== */
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(-10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+}
+
+/* ==========================================================================
+   Messages Styles
+   ========================================================================== */
+
+.alert {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .navbar-brand span {
+        font-size: 1.2rem;
+    }
+    
+    .nav-link-custom, .nav-link-admin {
+        margin: 2px 0;
+    }
+    
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    main {
+        padding-top: 80px;
+    }
+}
+
+@media (max-width: 576px) {
+    main {
+        padding-top: 70px;
+    }
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+
+.card {
+    transition: all 0.3s ease;
+}
+
+.badge {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}

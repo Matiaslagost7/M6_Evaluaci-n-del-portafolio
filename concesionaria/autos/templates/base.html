@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Concesionaria - {% endblock title %}</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    
+    {% block extra_css %}{% endblock extra_css %}
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Modern Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" 
+         style="background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); backdrop-filter: blur(10px);">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="{% url 'public:index' %}" 
+               style="color: #007bff; font-size: 1.5rem;">
+                <div class="bg-primary rounded-circle p-2 me-3">
+                    <i class="fas fa-car text-white"></i>
+                </div>
+                <span style="background: linear-gradient(45deg, #007bff, #0056b3); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    AutoVentas
+                </span>
+            </a>
+            
+            <!-- Toggle Button -->
+            <button class="navbar-toggler border-0 shadow-none" type="button" 
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Main Navigation -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold px-3 py-2 rounded-pill mx-1 nav-link-custom" 
+                           href="{% url 'public:index' %}">
+                            <i class="fas fa-home me-2"></i>Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold px-3 py-2 rounded-pill mx-1 nav-link-custom" 
+                           href="{% url 'public:catalogo' %}">
+                            <i class="fas fa-car-side me-2"></i>Catálogo
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold px-3 py-2 rounded-pill mx-1 nav-link-custom" 
+                           href="{% url 'public:contacto' %}">
+                            <i class="fas fa-phone me-2"></i>Contacto
+                        </a>
+                    </li>
+                    
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold px-3 py-2 rounded-pill mx-1 nav-link-admin" 
+                           href="{% url 'panel:inventario' %}">
+                            <i class="fas fa-clipboard-list me-2"></i>Inventario
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+
+                <!-- User Menu -->
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <!-- User Info -->
+                        <li class="nav-item dropdown me-2">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center px-3 py-2 rounded-pill" 
+                               href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" 
+                               style="background: rgba(0, 123, 255, 0.1); color: #007bff;">
+                                <div class="bg-primary rounded-circle p-1 me-2" style="width: 30px; height: 30px;">
+                                    <i class="fas fa-user text-white" style="font-size: 0.7rem;"></i>
+                                </div>
+                                <span class="fw-semibold">{{ user.username }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3">
+                                <li>
+                                    <h6 class="dropdown-header">
+                                        <i class="fas fa-user me-2"></i>Mi Cuenta
+                                    </h6>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                {% if perms.myapp_login.inventario_view %}
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'panel:inventario' %}">
+                                        <i class="fas fa-clipboard-list me-2 text-primary"></i>Panel de Inventario
+                                    </a>
+                                </li>
+                                {% endif %}
+                                <li>
+                                    <a class="dropdown-item text-danger" href="{% url 'panel:logout' %}">
+                                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <!-- Login/Register Buttons -->
+                        <li class="nav-item me-2">
+                            <a class="btn btn-outline-primary rounded-pill px-4 fw-semibold" 
+                               href="{% url 'panel:login' %}" 
+                               style="border: 2px solid #007bff; transition: all 0.3s ease;">
+                                <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary rounded-pill px-4 fw-semibold shadow-sm" 
+                               href="{% url 'panel:register' %}"
+                               style="background: linear-gradient(45deg, #007bff, #0056b3); border: none; transition: all 0.3s ease;">
+                                <i class="fas fa-user-plus me-2"></i>Registrarse
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow-1">
+        <!-- Messages -->
+        {% if messages %}
+            <div class="container mt-3">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <i class="fas fa-info-circle me-2"></i>
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <!-- Modern Footer -->
+    <footer class="mt-5" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);">
+        <div class="container py-5">
+            <div class="row g-4">
+                <!-- Company Info -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-primary rounded-circle p-3 me-3">
+                            <i class="fas fa-car text-white fa-lg"></i>
+                        </div>
+                        <h4 class="text-white fw-bold mb-0">AutoVentas</h4>
+                    </div>
+                    <p class="text-light opacity-75 mb-4">
+                        Tu concesionaria de confianza. Encuentra el vehículo perfecto 
+                        con la mejor calidad y servicio al cliente.
+                    </p>
+                    <!-- Social Media -->
+                    <div class="d-flex gap-3">
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 40px; height: 40px;">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 40px; height: 40px;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 40px; height: 40px;">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 40px; height: 40px;">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="text-white fw-bold mb-3">
+                        <i class="fas fa-link me-2 text-primary"></i>Enlaces
+                    </h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="{% url 'public:index' %}" class="text-light text-decoration-none opacity-75 footer-link">
+                                <i class="fas fa-chevron-right me-2 text-primary"></i>Inicio
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="{% url 'public:catalogo' %}" class="text-light text-decoration-none opacity-75 footer-link">
+                                <i class="fas fa-chevron-right me-2 text-primary"></i>Catálogo
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="{% url 'public:contacto' %}" class="text-light text-decoration-none opacity-75 footer-link">
+                                <i class="fas fa-chevron-right me-2 text-primary"></i>Contacto
+                            </a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="mb-2">
+                            <a href="{% url 'panel:inventario' %}" class="text-light text-decoration-none opacity-75 footer-link">
+                                <i class="fas fa-chevron-right me-2 text-primary"></i>Inventario
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white fw-bold mb-3">
+                        <i class="fas fa-tools me-2 text-primary"></i>Servicios
+                    </h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <span class="text-light opacity-75">
+                                <i class="fas fa-car me-2 text-primary"></i>Venta de Vehículos
+                            </span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="text-light opacity-75">
+                                <i class="fas fa-wrench me-2 text-primary"></i>Mantenimiento
+                            </span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="text-light opacity-75">
+                                <i class="fas fa-shield-alt me-2 text-primary"></i>Garantías
+                            </span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="text-light opacity-75">
+                                <i class="fas fa-handshake me-2 text-primary"></i>Asesoramiento
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white fw-bold mb-3">
+                        <i class="fas fa-map-marker-alt me-2 text-primary"></i>Contacto
+                    </h5>
+                    <div class="text-light opacity-75">
+                        <div class="mb-3">
+                            <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                            <span>Av. Principal 123<br>Ciudad, País</span>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-phone me-2 text-primary"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-envelope me-2 text-primary"></i>
+                            <span>info@autoventas.com</span>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-clock me-2 text-primary"></i>
+                            <span>Lun - Vie: 9:00 - 18:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <hr class="my-4" style="border-color: rgba(255, 255, 255, 0.1);">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-light opacity-75 mb-0">
+                        &copy; 2025 AutoVentas Concesionaria. Todos los derechos reservados.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex flex-wrap justify-content-md-end gap-3">
+                        <a href="#" class="text-light text-decoration-none opacity-75 footer-link">
+                            Términos de Servicio
+                        </a>
+                        <a href="#" class="text-light text-decoration-none opacity-75 footer-link">
+                            Política de Privacidad
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Top Button -->
+        <button class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 shadow-lg back-to-top" 
+                style="width: 50px; height: 50px; z-index: 1000; display: none;"
+                onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="{% static 'js/base.js' %}"></script>
+
+    {% block extra_js %}{% endblock extra_js %}
+
+</body>
+</html>
