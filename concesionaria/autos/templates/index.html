@@ -1,11 +1,161 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inicio - AutoVentas{% endblock title %}
+
+{% block main_class %}{% endblock main_class %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'autos/css/index.css' %}">
+{% endblock extra_css %}
 
 {% block content %}
-    <div class="jumbotron text-center bg-light p-5 rounded">
-        <h1 class="display-4">Bienvenido a AutoVentas</h1>
-        <p class="lead">Tu concesionaria de autos de confianza.</p>
-        <hr class="my-4">
-        <p>Explora nuestra amplia gama de vehículos y encuentra el auto perfecto para ti.</p>
-        <a class="btn btn-primary btn-lg" href="{% url 'public:catalogo' %}" role="button">Ver Autos Disponibles</a>
-    </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row min-vh-100 align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="hero-title display-3 fw-bold mb-4">
+                            Bienvenido a <span class="text-primary">AutoVentas</span>
+                        </h1>
+                        <p class="hero-subtitle lead text-muted mb-4">
+                            Tu concesionaria de autos de confianza.
+                        </p>
+                        <p class="hero-description mb-5">
+                            Explora nuestra amplia gama de vehículos y encuentra el auto perfecto para ti.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="{% url 'public:catalogo' %}" class="btn btn-primary btn-lg me-3 mb-2">
+                                <i class="fas fa-car me-2"></i>Ver Autos Disponibles
+                            </a>
+                            <a href="{% url 'public:contacto' %}" class="btn btn-outline-primary btn-lg mb-2">
+                                <i class="fas fa-phone me-2"></i>Contáctanos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image text-center">
+                        <div class="hero-car-icon">
+                            <i class="fas fa-car fa-10x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title display-5 fw-bold">¿Por qué elegir AutoVentas?</h2>
+                    <p class="section-subtitle text-muted">Ofrecemos los mejores servicios para tu experiencia automotriz</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100 p-4 bg-white rounded-3 shadow-sm">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-link fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="feature-title mb-3">Enlaces Rápidos</h4>
+                        <p class="feature-description text-muted">
+                            Accede fácilmente a todas nuestras secciones con navegación intuitiva y rápida.
+                        </p>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2">
+                                <i class="fas fa-chevron-right text-primary me-2"></i>
+                                Navegación sencilla
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-chevron-right text-primary me-2"></i>
+                                Acceso directo al catálogo
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-chevron-right text-primary me-2"></i>
+                                Información al alcance
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100 p-4 bg-white rounded-3 shadow-sm">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-tools fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="feature-title mb-3">Servicios Completos</h4>
+                        <p class="feature-description text-muted">
+                            Ofrecemos una gama completa de servicios automotrices para satisfacer todas tus necesidades.
+                        </p>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2">
+                                <i class="fas fa-car text-primary me-2"></i>
+                                Venta de vehículos
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-wrench text-primary me-2"></i>
+                                Mantenimiento profesional
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-shield-alt text-primary me-2"></i>
+                                Garantías extendidas
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100 p-4 bg-white rounded-3 shadow-sm">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-map-marker-alt fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="feature-title mb-3">Ubicación Conveniente</h4>
+                        <p class="feature-description text-muted">
+                            Visítanos en nuestra ubicación conveniente con fácil acceso y amplio estacionamiento.
+                        </p>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2">
+                                <i class="fas fa-phone text-primary me-2"></i>
+                                +1 (555) 123-4567
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-envelope text-primary me-2"></i>
+                                info@autoventas.com
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-clock text-primary me-2"></i>
+                                Lun - Vie: 9:00 - 18:00
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="cta-content">
+                        <h3 class="cta-title display-6 fw-bold mb-3">¿Listo para encontrar tu auto ideal?</h3>
+                        <p class="cta-description lead text-muted mb-4">
+                            Explora nuestro catálogo completo y descubre las mejores ofertas en vehículos de calidad.
+                        </p>
+                        <a href="{% url 'public:catalogo' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-car-side me-2"></i>Explorar Catálogo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock content %}

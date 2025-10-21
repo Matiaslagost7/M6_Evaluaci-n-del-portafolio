@@ -6,16 +6,52 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // =========================================================================
+    // Modern Navbar Functionality
+    // =========================================================================
+    
+    const navbar = document.querySelector('.modern-navbar');
+    const navbarProgress = document.getElementById('navbarProgress');
+    
+    // Navbar scroll effects
+    window.addEventListener('scroll', function() {
+        const scrolled = window.scrollY > 50;
+        
+        if (scrolled) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        
+        // Update progress bar
+        if (navbarProgress) {
+            const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (window.scrollY / windowHeight) * 100;
+            navbarProgress.style.width = Math.min(scrollPercent, 100) + '%';
+        }
+    });
+    
+    // Active nav link highlighting
+    const currentPagePath = window.location.pathname;
+    const modernNavLinks = document.querySelectorAll('.modern-nav-link');
+    
+    modernNavLinks.forEach(link => {
+        const linkPath = new URL(link.href).pathname;
+        if (linkPath === currentPagePath) {
+            link.classList.add('active');
+        }
+    });
+    
+    // =========================================================================
     // Back to Top Button Functionality
     // =========================================================================
     
-    const backToTopButton = document.querySelector('.back-to-top');
+    const backToTopButton = document.querySelector('.back-to-top-btn');
     
     if (backToTopButton) {
         // Show/Hide back to top button based on scroll position
         window.addEventListener('scroll', function() {
             if (window.scrollY > 300) {
-                backToTopButton.style.display = 'block';
+                backToTopButton.style.display = 'flex';
             } else {
                 backToTopButton.style.display = 'none';
             }
@@ -31,14 +67,47 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // =========================================================================
-    // Active Navigation Link Highlighting
+    // Newsletter Form Functionality
     // =========================================================================
     
-    const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('.nav-link-custom, .nav-link-admin');
+    const newsletterForm = document.querySelector('.newsletter-form');
     
-    navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPath) {
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = this.querySelector('.newsletter-input').value;
+            const button = this.querySelector('.newsletter-btn');
+            const originalText = button.innerHTML;
+            
+            // Simulate submission
+            button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Enviando...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.innerHTML = '<i class="fas fa-check me-2"></i>¡Suscrito!';
+                button.classList.remove('btn-primary');
+                button.classList.add('btn-success');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('btn-success');
+                    button.classList.add('btn-primary');
+                    button.disabled = false;
+                    this.reset();
+                }, 2000);
+            }, 1500);
+        });
+    }
+    
+    // =========================================================================
+    // Legacy Navigation Support (Fallback)
+    // =========================================================================
+    
+    const legacyNavLinks = document.querySelectorAll('.nav-link-custom, .nav-link-admin');
+    
+    legacyNavLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPagePath) {
             link.classList.add('active');
             link.style.backgroundColor = 'rgba(0, 123, 255, 0.2)';
             link.style.color = '#007bff';

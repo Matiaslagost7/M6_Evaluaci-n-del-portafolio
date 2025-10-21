@@ -3,7 +3,7 @@
 {% block title %}Contacto - Concesionaria{% endblock title %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/contacto.css' %}">
+<link rel="stylesheet" href="{% static 'autos/css/contacto.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
@@ -18,12 +18,12 @@
                 <p class="lead text-muted">
                     ¿Tienes alguna pregunta sobre nuestros vehículos? Estamos aquí para ayudarte.
                 </p>
-                <hr class="w-25 mx-auto" style="height: 3px; background: linear-gradient(45deg, #007bff, #0056b3);">
+                <hr class="w-25 mx-auto contact-section-divider">
             </div>
 
             <!-- Contact Form Card -->
-            <div class="card shadow-lg border-0" style="border-radius: 20px;">
-                <div class="card-header bg-primary text-white text-center" style="border-radius: 20px 20px 0 0;">
+            <div class="card shadow-lg border-0 contact-main-card">
+                <div class="card-header bg-primary text-white text-center contact-card-header">
                     <h3 class="mb-0">
                         <i class="fas fa-comment-dots me-2"></i>Formulario de Contacto
                     </h3>
@@ -95,7 +95,7 @@
 
                         <!-- Submit Button -->
                         <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg px-5 py-3" style="border-radius: 50px; background: linear-gradient(45deg, #007bff, #0056b3); border: none; transition: all 0.3s;">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 py-3 contact-submit-btn">
                                 <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
                             </button>
                         </div>
@@ -106,7 +106,7 @@
             <!-- Contact Information -->
             <div class="row mt-5">
                 <div class="col-md-4 text-center mb-4">
-                    <div class="card h-100 shadow-sm border-0" style="border-radius: 15px;">
+                    <div class="card h-100 shadow-sm border-0 contact-info-card">
                         <div class="card-body p-4">
                             <div class="mb-3">
                                 <i class="fas fa-phone-alt fa-2x text-primary"></i>
@@ -118,7 +118,7 @@
                 </div>
                 
                 <div class="col-md-4 text-center mb-4">
-                    <div class="card h-100 shadow-sm border-0" style="border-radius: 15px;">
+                    <div class="card h-100 shadow-sm border-0 contact-info-card">
                         <div class="card-body p-4">
                             <div class="mb-3">
                                 <i class="fas fa-envelope fa-2x text-primary"></i>
@@ -130,7 +130,7 @@
                 </div>
                 
                 <div class="col-md-4 text-center mb-4">
-                    <div class="card h-100 shadow-sm border-0" style="border-radius: 15px;">
+                    <div class="card h-100 shadow-sm border-0 contact-info-card">
                         <div class="card-body p-4">
                             <div class="mb-3">
                                 <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
@@ -145,39 +145,5 @@
     </div>
 </div>
 
-<!-- Custom Styles -->
-<style>
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
-    }
-    
-    .card:hover {
-        transform: translateY(-5px);
-        transition: all 0.3s ease;
-    }
-    
-    .input-group-text {
-        border: none;
-    }
-    
-    .form-control {
-        border: 2px solid #e9ecef;
-        border-left: none;
-        transition: all 0.3s ease;
-    }
-    
-    .form-control:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.15);
-    }
-    
-    .form-control::placeholder {
-        color: #6c757d;
-        opacity: 0.8;
-    }
-</style>
 
-<!-- Add Font Awesome if not already included -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 {% endblock content %}

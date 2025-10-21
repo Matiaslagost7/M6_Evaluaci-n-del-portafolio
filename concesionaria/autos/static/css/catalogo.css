@@ -36,3 +36,56 @@
         margin-bottom: 2rem;
     }
 }
+
+/* ==========================================================================
+   Additional Catálogo Styles (Extracted from inline styles)
+   ========================================================================== */
+
+/* Main container background */
+.catalogo-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* Section divider */
+.section-divider {
+    height: 3px;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+}
+
+/* Vehicle card styling */
+.vehicle-card-custom {
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+/* Placeholder image for vehicles without images */
+.image-placeholder {
+    height: 250px;
+    background: linear-gradient(45deg, #6c757d, #495057);
+}
+
+/* Card text styling */
+.description-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Custom button styling */
+.btn-details {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+/* No vehicles card */
+.no-vehicles-card {
+    max-width: 500px;
+    border-radius: 20px;
+}
+
+/* CTA card */
+.cta-card {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    border-radius: 20px;
+}

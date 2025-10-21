@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.db import models
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Automovil
 from .forms import ContactoForm
 
@@ -17,9 +17,10 @@ def contacto(request):
         if form.is_valid():
             # Procesar el formulario
             nombre = form.cleaned_data['nombre']
-            correo = form.cleaned_data['correo']
-            mensaje = form.cleaned_data['mensaje']
-            # Aquí podrías enviar un correo o guardar el mensaje en la base de datos
+            # En una implementación real, aquí enviarías un correo electrónico
+            # o guardarías el mensaje en la base de datos usando:
+            # correo = form.cleaned_data['correo']
+            # mensaje = form.cleaned_data['mensaje']
             return render(request, 'contacto_exito.html', {'nombre': nombre})
     else:
         form = ContactoForm()
@@ -27,6 +28,7 @@ def contacto(request):
 
 # Vista para mostrar el catálogo de automóviles
 def catalogo(request):
+    # Mostrar todos los automóviles en el catálogo público
     automoviles = Automovil.objects.all()
     if not automoviles:
         mensaje = "No hay automóviles disponibles en el catálogo."
@@ -41,12 +43,13 @@ def detalle_automovil(request, automovil_id):
     Esta es la vista pública del catálogo, sin requerir autenticación.
     """
     try:
-        automovil = Automovil.objects.get(id=automovil_id, disponible=True)
+        # Mostrar cualquier automóvil, independientemente de su disponibilidad
+        automovil = Automovil.objects.get(id=automovil_id)
         return render(request, 'detalle_auto.html', {'auto': automovil})
     except Automovil.DoesNotExist:
-        return render(request, 'catalogo.html', {
-            'mensaje': 'El automóvil solicitado no está disponible.'
-        })
+        # Si el automóvil no existe, redirigir al catálogo
+        messages.warning(request, 'El automóvil solicitado no existe.')
+        return redirect('public:catalogo')
 
 # Vista para buscar automóviles en el catálogo público
 def buscar_automovil(request):
@@ -57,10 +60,12 @@ def buscar_automovil(request):
     resultados = []
     
     if query:
-        resultados = Automovil.objects.filter(
-            (models.Q(marca__icontains=query) | models.Q(modelo__icontains=query)),
-            disponible=True
-        )
+        # Buscar en marca y modelo por separado y combinar resultados
+        # Solo mostrar autos con stock > 0
+        resultados_marca = Automovil.objects.filter(marca__icontains=query, stock__gt=0)
+        resultados_modelo = Automovil.objects.filter(modelo__icontains=query, stock__gt=0)
+        # Combinar y eliminar duplicados usando distinct()
+        resultados = (resultados_marca | resultados_modelo).distinct()
     
     return render(request, 'buscar_automovil.html', {
         'resultados': resultados, 

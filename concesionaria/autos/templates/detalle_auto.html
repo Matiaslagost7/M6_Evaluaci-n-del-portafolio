@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ auto.marca }} {{ auto.modelo }} - Detalles{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'autos/css/detalle_auto.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="detalle-container">
+    <div class="container">
+        <!-- Back Button -->
+        <div class="mb-4">
+            <a href="{% url 'public:catalogo' %}" class="btn btn-back">
+                <i class="fas fa-arrow-left me-2"></i>Volver al Catálogo
+            </a>
+        </div>
+
+        <!-- Vehicle Detail Card -->
+        <div class="card vehicle-detail-card">
+            <!-- Image Section -->
+            <div class="vehicle-image-container">
+                {% if auto.imagen %}
+                    <img src="{{ auto.imagen.url }}" alt="{{ auto.marca }} {{ auto.modelo }}">
+                {% else %}
+                    <div class="d-flex align-items-center justify-content-center h-100">
+                        <div class="text-center text-muted">
+                            <i class="fas fa-car fa-5x mb-3 opacity-50"></i>
+                            <p class="fs-4">Sin Imagen Disponible</p>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                <!-- Price Badge -->
+                <div class="price-badge">
+                    <i class="fas fa-dollar-sign"></i>{{ auto.precio|floatformat:0 }}
+                </div>
+                
+                <!-- Status Badge -->
+                {% if auto.stock > 0 %}
+                    <div class="status-badge bg-success text-white">
+                        <i class="fas fa-check-circle me-2"></i>Disponible ({{ auto.stock }} unidad{{ auto.stock|pluralize:"es" }})
+                    </div>
+                {% else %}
+                    <div class="status-badge bg-danger text-white">
+                        <i class="fas fa-times-circle me-2"></i>Sin Stock
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Details Section -->
+            <div class="detail-section">
+                <h1 class="detail-title">
+                    <i class="fas fa-car me-3"></i>{{ auto.marca }} {{ auto.modelo }}
+                </h1>
+
+                <div class="row mt-4">
+                    <!-- Left Column -->
+                    <div class="col-md-6">
+                        <div class="detail-item">
+                            <i class="fas fa-industry"></i>
+                            <div class="d-inline-block">
+                                <div class="detail-label">Marca</div>
+                                <div class="detail-value">{{ auto.marca }}</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-item">
+                            <i class="fas fa-car-side"></i>
+                            <div class="d-inline-block">
+                                <div class="detail-label">Modelo</div>
+                                <div class="detail-value">{{ auto.modelo }}</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div class="d-inline-block">
+                                <div class="detail-label">Año</div>
+                                <div class="detail-value">{{ auto.anio }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="col-md-6">
+                        <div class="detail-item">
+                            <i class="fas fa-tag"></i>
+                            <div class="d-inline-block">
+                                <div class="detail-label">Precio</div>
+                                <div class="detail-value">${{ auto.precio|floatformat:0 }}</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-item">
+                            <i class="fas fa-info-circle"></i>
+                            <div class="d-inline-block">
+                                <div class="detail-label">Estado</div>
+                                <div class="detail-value">
+                                    {% if auto.stock > 0 %}
+                                        <span class="text-success fw-bold">
+                                            <i class="fas fa-check-circle me-1"></i>Disponible ({{ auto.stock }} unidad{{ auto.stock|pluralize:"es" }} en stock)
+                                        </span>
+                                    {% else %}
+                                        <span class="text-danger fw-bold">
+                                            <i class="fas fa-times-circle me-1"></i>Sin stock disponible
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="d-inline-block">
+                                <div class="detail-label">Registrado</div>
+                                <div class="detail-value">{{ auto.fecha_registro|date:"d/m/Y" }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                {% if auto.descripcion %}
+                <div class="mt-4">
+                    <div class="detail-item">
+                        <i class="fas fa-file-alt"></i>
+                        <div class="d-inline-block w-100">
+                            <div class="detail-label">Descripción</div>
+                            <div class="detail-value">{{ auto.descripcion }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Contact CTA -->
+                <div class="text-center mt-5">
+                    <h4 class="mb-3">¿Interesado en este vehículo?</h4>
+                    <a href="{% url 'public:contacto' %}" class="btn btn-contact">
+                        <i class="fas fa-phone me-2"></i>Contáctanos Ahora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

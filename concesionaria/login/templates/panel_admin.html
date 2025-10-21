@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Usuarios{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1>Usuarios</h1>
+
+  <div class="row mb-3">
+    <div class="col-md-12 text-end">
+      {% if can_create_user %}
+        <a class="btn btn-success" href="{% url 'panel:crear_usuario' %}">Crear usuario</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Usuario</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Roles</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in usuarios %}
+      <tr>
+        <td>{{ u.username }}</td>
+        <td>{{ u.get_full_name|default:"-" }}</td>
+        <td>{{ u.email }}</td>
+        <td>
+          {% for grp in u.groups.all %}
+            <span class="badge bg-secondary">{{ grp.name }}</span>
+          {% empty %}
+            <span class="text-muted">—</span>
+          {% endfor %}
+        </td>
+        <td>
+          <div class="btn-group" role="group">
+            {% if perms.login.EditarUsuario %}
+              <a href="{% url 'panel:editar_usuario' u.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+            {% endif %}
+            {% if perms.login.EliminarUsuario %}
+              <a href="{% url 'panel:eliminar_usuario' u.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+            {% endif %}
+          </div>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5">No hay usuarios.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

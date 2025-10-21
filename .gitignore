@@ -9,5 +9,6 @@ venv/
 # Django
 *.log
 *.sqlite3
+staticfiles/
 
 .vscode/
