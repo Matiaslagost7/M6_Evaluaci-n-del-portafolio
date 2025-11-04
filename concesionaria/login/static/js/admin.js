@@ -3,48 +3,6 @@
  * Concesionaria AutoVentas
  */
 
-// ==========================================================================
-// FUNCIONES DEL PANEL DE ADMINISTRACIÓN
-// ==========================================================================
-
-// Funcionalidad de búsqueda de usuarios
-function initializeUserSearch() {
-    const searchInput = document.getElementById('searchUser');
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const rows = document.querySelectorAll('.user-row');
-            
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                if (text.includes(searchTerm)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-    }
-}
-
-// Inicializar tooltips de Bootstrap
-function initializeTooltips() {
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
-}
-
-// Inicializar funciones del panel de admin cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
-    initializeUserSearch();
-    initializeTooltips();
-});
-
-// ==========================================================================
-// UTILIDADES GENERALES
-// ==========================================================================
-
 // Utilidades generales
 const AdminUtils = {
     // Mostrar/ocultar elementos

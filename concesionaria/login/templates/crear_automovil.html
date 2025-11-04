@@ -3,7 +3,6 @@
 {% block title %}Crear Automóvil{% endblock title %}
 
 {% block extra_css %}
-<link href="{% static 'login/css/base.css' %}" rel="stylesheet">
 <link href="{% static 'login/css/admin-forms.css' %}" rel="stylesheet">
 {% endblock %}
 
@@ -123,8 +122,8 @@
                                     </label>
                                     <div class="custom-file-upload">
                                         {{ form.imagen }}
-                                        <div class="upload-preview mt-3" id="imagePreview">
-                                            <img id="previewImg" src="#" alt="Vista previa" class="img-thumbnail preview-img">
+                                        <div class="upload-preview mt-3" id="imagePreview" style="display: none;">
+                                            <img id="previewImg" src="#" alt="Vista previa" class="img-thumbnail" style="max-height: 200px;">
                                         </div>
                                     </div>
                                     <div class="form-text">Formatos soportados: JPG, PNG, WEBP (máx. 5MB)</div>

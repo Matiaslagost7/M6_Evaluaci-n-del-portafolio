@@ -2,37 +2,9 @@ from django import forms
 from .models import Automovil
 
 class ContactoForm(forms.Form):
-    nombre = forms.CharField(
-        max_length=100,
-        label='Nombre Completo',
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Escribe tu nombre completo',
-            'required': True,
-            'aria-label': 'Nombre completo'
-        })
-    )
-    correo = forms.EmailField(
-        label='Correo Electrónico',
-        widget=forms.EmailInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'ejemplo@correo.com',
-            'required': True,
-            'aria-label': 'Correo electrónico'
-        })
-    )
-    mensaje = forms.CharField(
-        label='Mensaje',
-        min_length=10,
-        max_length=1000,
-        widget=forms.Textarea(attrs={
-            'class': 'form-control',
-            'placeholder': 'Cuéntanos cómo podemos ayudarte...',
-            'rows': 5,
-            'required': True,
-            'aria-label': 'Mensaje'
-        })
-    )
+    nombre = forms.CharField(max_length=100)
+    correo = forms.EmailField()
+    mensaje = forms.CharField(widget=forms.Textarea)
 
 class AutomovilForm(forms.ModelForm):
     class Meta:

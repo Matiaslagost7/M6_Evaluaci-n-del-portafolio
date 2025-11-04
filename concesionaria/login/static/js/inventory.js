@@ -1,49 +1,7 @@
 /**
- * JavaScript para Gestión de Inventario
- * Concesionaria AutoVentas - Panel de Administración
+ * JavaScript para Autenticación
+ * Concesionaria AutoVentas - Login y Registro
  */
-
-// ==========================================================================
-// FUNCIONES DEL INVENTARIO
-// ==========================================================================
-
-// Funcionalidad de búsqueda de vehículos
-function initializeVehicleSearch() {
-    const searchInput = document.getElementById('searchVehicle');
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const rows = document.querySelectorAll('.vehicle-row');
-            
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                if (text.includes(searchTerm)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-    }
-}
-
-// Inicializar tooltips de Bootstrap para inventario
-function initializeInventoryTooltips() {
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
-}
-
-// Inicializar funciones del inventario cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
-    initializeVehicleSearch();
-    initializeInventoryTooltips();
-});
-
-// ==========================================================================
-// FUNCIONES DE AUTENTICACIÓN (LEGACY)
-// ==========================================================================
 
 // Manejo de formularios de autenticación
 const AuthHandler = {

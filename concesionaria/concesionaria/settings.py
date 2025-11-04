@@ -120,9 +120,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Directorios adicionales donde Django buscará archivos estáticos
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # Carpeta static centralizada a nivel de proyecto
+    os.path.join(BASE_DIR, 'autos/static'),
+    os.path.join(BASE_DIR, 'login/static'),
 ]
 
 # Configuración de archivos multimedia

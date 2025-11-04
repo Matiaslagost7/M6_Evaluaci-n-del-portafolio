@@ -3,7 +3,7 @@
 {% block title %}Editar Automóvil{% endblock title %}
 
 {% block extra_css %}
-<link href="{% static 'login/css/base.css' %}" rel="stylesheet">
+<link href="{% static 'login/css/admin-forms.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -29,9 +29,10 @@
                         <div class="col-md-3">
                             {% if object.imagen %}
                                 <img src="{{ object.imagen.url }}" alt="{{ object.marca }} {{ object.modelo }}" 
-                                     class="img-thumbnail w-100 preview-img-sm">
+                                     class="img-thumbnail w-100" style="max-height: 120px; object-fit: cover;">
                             {% else %}
-                                <div class="bg-secondary text-white d-flex align-items-center justify-content-center rounded img-placeholder-sm">
+                                <div class="bg-secondary text-white d-flex align-items-center justify-content-center rounded" 
+                                     style="height: 120px;">
                                     <i class="fas fa-car fa-3x opacity-50"></i>
                                 </div>
                             {% endif %}
@@ -152,15 +153,15 @@
                                         <div class="current-image mb-2">
                                             <small class="text-muted d-block">Imagen actual:</small>
                                             <img src="{{ object.imagen.url }}" alt="Imagen actual" 
-                                                 class="img-thumbnail mb-2 preview-img-edit">
+                                                 class="img-thumbnail mb-2" style="max-height: 150px;">
                                         </div>
                                     {% endif %}
                                     
                                     <div class="custom-file-upload">
                                         {{ form.imagen }}
-                                        <div class="upload-preview mt-3" id="imagePreview">
+                                        <div class="upload-preview mt-3" id="imagePreview" style="display: none;">
                                             <small class="text-muted d-block">Nueva imagen:</small>
-                                            <img id="previewImg" src="#" alt="Vista previa" class="img-thumbnail preview-img-edit">
+                                            <img id="previewImg" src="#" alt="Vista previa" class="img-thumbnail" style="max-height: 150px;">
                                         </div>
                                     </div>
                                     <div class="form-text">
