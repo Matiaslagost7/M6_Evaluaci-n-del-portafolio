@@ -3,6 +3,289 @@
  * Concesionaria AutoVentas - Panel Administrativo
  */
 
+/* ==========================================================================
+   📱 ESTILOS ESPECÍFICOS EXTRAÍDOS DEL TEMPLATE
+   ========================================================================== */
+body {
+    background: var(--bg-secondary);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    color: var(--text-primary, #111827);
+    padding-top: 0;
+}
+
+.inventory-container {
+    margin-top: 80px;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Typography consistency */
+.inventory-container h1, .inventory-container h2, .inventory-container h3, 
+.inventory-container h4, .inventory-container h5, .inventory-container h6 {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 600;
+}
+
+.inventory-container .hero-title {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+/* Inventory Page Convergent Styles */
+.hero-inventory-header {
+    transition: all 0.3s ease;
+}
+
+.hero-inventory-header:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.stats-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.stats-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.stats-card .icon-wrapper {
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover .icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.vehicle-row {
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.vehicle-row:hover {
+    background: linear-gradient(135deg, var(--blue-50) 0%, #ffffff 100%);
+    border-left-color: var(--primary);
+    transform: translateX(8px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.breadcrumb-dark .breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(255, 255, 255, 0.7);
+    content: "›";
+    font-weight: bold;
+}
+
+.breadcrumb-dark .breadcrumb-item {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: var(--font-size-sm);
+}
+
+.breadcrumb-dark .breadcrumb-item.active {
+    color: var(--warning);
+    font-weight: 600;
+}
+
+.table th {
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    border: none;
+    background: var(--bg-secondary);
+}
+
+.table-container {
+    transition: all 0.3s ease;
+}
+
+.table-container:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.search-container input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--blue-100);
+    outline: none;
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: var(--font-weight-medium);
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-inventory-header .display-4 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .stats-card {
+        margin-bottom: 1rem;
+    }
+    
+    .search-container input {
+        width: 100% !important;
+    }
+    
+    .table-header .d-flex {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* ==========================================================================
+   📱 CLASES ESPECÍFICAS PARA ELEMENTOS CON STYLE INLINE
+   ========================================================================== */
+
+/* Background del container principal */
+.inventory-main-bg {
+    background: linear-gradient(135deg, var(--blue-50) 0%, var(--bg-secondary) 100%); 
+    min-height: calc(100vh - 80px); 
+    padding: 2rem 0;
+}
+
+/* Header hero */
+.hero-inventory-bg {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); 
+    border-radius: 20px; 
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Icono de fondo */
+.hero-warehouse-icon {
+    font-size: 15rem; 
+    color: white;
+}
+
+/* Título principal */
+.hero-inventory-title {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+    font-weight: 800; 
+    letter-spacing: -1px;
+}
+
+.hero-inventory-highlight {
+    color: var(--warning);
+}
+
+/* Container del estado vacío */
+.empty-state-bg {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state-title {
+    color: var(--text-primary);
+}
+
+.empty-state-btn {
+    border-radius: 12px; 
+    font-weight: 600;
+}
+
+.empty-state-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state-title {
+    color: var(--text-primary);
+}
+
+/* Icon de vehículo en tabla */
+.vehicle-icon-bg {
+    width: 40px; 
+    height: 40px;
+}
+
+/* Descripción truncada */
+.vehicle-description {
+    max-width: 200px;
+}
+
+/* ==========================================================================
+   📈 CARDS DE ESTADÍSTICAS ESPECÍFICAS DEL INVENTARIO
+   ========================================================================== */
+
+/* Cards de estadísticas del inventario */
+.stats-card-vehicles {
+    background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
+    border: 1px solid var(--primary-light);
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.stats-card-available {
+    background: linear-gradient(135deg, #ffffff 0%, #f1f8e9 100%);
+    border: 1px solid var(--success-light);
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.stats-card-average {
+    background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 100%);
+    border: 1px solid var(--secondary-light);
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.stats-card-status {
+    background: linear-gradient(135deg, #ffffff 0%, #fff8e1 100%);
+    border: 1px solid var(--warning-light);
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+/* Container de tabla del inventario */
+.inventory-table-container {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+/* Header de tabla del inventario */
+.inventory-table-header {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, #ffffff 100%); 
+    border-color: var(--border-color);
+}
+
+.inventory-table-title {
+    color: var(--text-primary); 
+    font-size: var(--font-size-xl);
+}
+
+.inventory-table-icon {
+    color: var(--primary);
+}
+
+.inventory-search-input {
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding-left: 2.5rem;
+    width: 280px;
+    font-size: var(--font-size-sm);
+}
+
 :root {
     --inventory-primary: #2c3e50;
     --inventory-secondary: #34495e;

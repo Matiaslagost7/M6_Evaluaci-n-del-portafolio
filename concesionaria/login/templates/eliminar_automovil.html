@@ -3,8 +3,7 @@
 {% block title %}Eliminar Automóvil{% endblock title %}
 
 {% block extra_css %}
-<link href="{% static 'login/css/admin-forms.css' %}" rel="stylesheet">
-<link href="{% static 'login/css/eliminar_automovil.css' %}" rel="stylesheet">
+<link href="{% static 'login/css/base.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -30,10 +29,9 @@
                         <div class="col-md-4">
                             {% if object.imagen %}
                                 <img src="{{ object.imagen.url }}" alt="{{ object.marca }} {{ object.modelo }}" 
-                                     class="img-fluid rounded shadow-sm w-100" style="max-height: 150px; object-fit: cover;">
+                                     class="img-fluid rounded shadow-sm w-100 preview-img-edit">
                             {% else %}
-                                <div class="bg-secondary text-white d-flex align-items-center justify-content-center rounded shadow-sm" 
-                                     style="height: 150px;">
+                                <div class="bg-secondary text-white d-flex align-items-center justify-content-center rounded shadow-sm img-placeholder">
                                     <i class="fas fa-car fa-3x opacity-50"></i>
                                 </div>
                             {% endif %}
